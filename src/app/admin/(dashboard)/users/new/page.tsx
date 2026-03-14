@@ -71,6 +71,7 @@ const currencies = [
   { code: "ARS", name: "Argentine Peso" },
   { code: "CLP", name: "Chilean Peso" },
   { code: "PEN", name: "Peruvian Sol" },
+  { code: "BZD", name: "Belize Dollar" },
 ];
 
 export default function NewUserPage() {

@@ -111,6 +111,7 @@ export const currencies: Currency[] = [
   { code: "NIO", name: "Nicaraguan Cordoba", symbol: "C$", country: "Nicaragua" },
   { code: "CRC", name: "Costa Rican Colon", symbol: "₡", country: "Costa Rica" },
   { code: "PAB", name: "Panamanian Balboa", symbol: "B/.", country: "Panama" },
+  { code: "BZD", name: "Belize Dollar", symbol: "BZ$", country: "Belize" },
   { code: "DOP", name: "Dominican Peso", symbol: "RD$", country: "Dominican Republic" },
   { code: "JMD", name: "Jamaican Dollar", symbol: "J$", country: "Jamaica" },
   { code: "TTD", name: "Trinidad Dollar", symbol: "TT$", country: "Trinidad and Tobago" },
