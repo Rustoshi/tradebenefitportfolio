@@ -17,11 +17,8 @@ interface ReferralContentProps {
 export function ReferralContent({ stats, referredUsers }: ReferralContentProps) {
   const [copied, setCopied] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
-
-  const referralLink = typeof window !== "undefined" 
-    ? `${window.location.origin}/register?ref=${stats.referralCode}`
-    : `/register?ref=${stats.referralCode}`;
-
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const referralLink = `${siteUrl}/register?ref=${stats.referralCode}`;
   const copyCode = async () => {
     try {
       await navigator.clipboard.writeText(stats.referralCode);

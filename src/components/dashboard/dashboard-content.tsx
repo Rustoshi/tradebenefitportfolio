@@ -55,13 +55,13 @@ const itemVariants = {
 };
 
 // Premium floating surface component with glass morphism
-function Surface({ 
-  children, 
-  className, 
+function Surface({
+  children,
+  className,
   delay = 0,
   variant = "default"
-}: { 
-  children: React.ReactNode; 
+}: {
+  children: React.ReactNode;
   className?: string;
   delay?: number;
   variant?: "default" | "fiat" | "btc" | "profit" | "elevated";
@@ -93,11 +93,11 @@ function Surface({
 }
 
 // Premium icon container with glow
-function IconBadge({ 
-  icon: Icon, 
-  variant 
-}: { 
-  icon: React.ElementType; 
+function IconBadge({
+  icon: Icon,
+  variant
+}: {
+  icon: React.ElementType;
   variant: "primary" | "success" | "warning" | "muted";
 }) {
   const styles = {
@@ -121,13 +121,13 @@ function IconBadge({
 // Simple sparkline component
 function Sparkline({ positive = true }: { positive?: boolean }) {
   // Generate a simple SVG sparkline pattern
-  const points = positive 
+  const points = positive
     ? "0,20 10,18 20,15 30,16 40,12 50,14 60,10 70,8 80,6 90,4 100,2"
     : "0,2 10,4 20,6 30,5 40,8 50,7 60,10 70,12 80,14 90,16 100,18";
-  
+
   return (
-    <svg 
-      viewBox="0 0 100 22" 
+    <svg
+      viewBox="0 0 100 22"
       className="w-full h-8"
       preserveAspectRatio="none"
     >
@@ -137,7 +137,7 @@ function Sparkline({ positive = true }: { positive?: boolean }) {
           <stop offset="100%" stopColor={positive ? "rgb(34, 197, 94)" : "rgb(239, 68, 68)"} stopOpacity="0" />
         </linearGradient>
       </defs>
-      <polygon 
+      <polygon
         points={`${points} 100,22 0,22`}
         fill={`url(#${positive ? "sparkGreen" : "sparkRed"})`}
       />
@@ -159,14 +159,14 @@ function SectionDivider() {
 }
 
 // Portfolio Allocation Bar Component
-function PortfolioAllocation({ 
-  fiat, 
-  btc, 
+function PortfolioAllocation({
+  fiat,
+  btc,
   profit,
   invested,
-}: { 
-  fiat: number; 
-  btc: number; 
+}: {
+  fiat: number;
+  btc: number;
   profit: number;
   invested: number;
 }) {
@@ -180,7 +180,7 @@ function PortfolioAllocation({
     { label: "Total Profit", value: profit, percent: total > 0 ? (profit / total) * 100 : 0, color: "bg-success" },
     { label: "Active Investment", value: invested, percent: total > 0 ? (invested / total) * 100 : 0, color: "bg-info" },
   ];
-  
+
   // Only show segments with value > 0 in the bar
   const barSegments = allSegments.filter(s => s.percent > 0);
 
@@ -203,10 +203,10 @@ function PortfolioAllocation({
       <div className="flex flex-wrap gap-x-4 gap-y-1">
         {allSegments.map(segment => {
           // Show "<1%" for very small non-zero percentages, otherwise show rounded value
-          const displayPercent = segment.percent === 0 
-            ? "0%" 
-            : segment.percent < 1 
-              ? "<1%" 
+          const displayPercent = segment.percent === 0
+            ? "0%"
+            : segment.percent < 1
+              ? "<1%"
               : `${segment.percent.toFixed(0)}%`;
           return (
             <div key={segment.label} className="flex items-center gap-1.5">
@@ -231,7 +231,7 @@ function DailyTipWidget() {
     { icon: Sparkles, text: "Refer friends and earn bonus rewards on their first investment." },
     { icon: Bitcoin, text: "Bitcoin holdings provide a hedge against currency fluctuations." },
   ];
-  
+
   // Select tip based on day of year for consistency
   const dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0).getTime()) / 86400000);
   const tip = tips[dayOfYear % tips.length];
@@ -297,7 +297,7 @@ function KycStatusBadge({ status }: { status?: string }) {
   const showCta = normalizedStatus === "unverified" || normalizedStatus === "rejected";
 
   return (
-    <Link 
+    <Link
       href="/dashboard/kyc"
       className={cn(
         "flex items-center justify-between p-3 rounded-xl border transition-all",
@@ -328,11 +328,11 @@ function KycStatusBadge({ status }: { status?: string }) {
 }
 
 // Account Info Widget - Plan, Tier, Referral Code
-function AccountInfoWidget({ 
-  tier, 
+function AccountInfoWidget({
+  tier,
   referralCode,
-  currentPlan 
-}: { 
+  currentPlan
+}: {
   tier: number;
   referralCode: string;
   currentPlan?: string;
@@ -480,7 +480,7 @@ export function DashboardContent({ user, btcPriceData, recentTransactions }: Das
 
           {/* Portfolio Allocation */}
           <div className="mt-4 pt-4 border-t border-white/5">
-            <PortfolioAllocation 
+            <PortfolioAllocation
               fiat={user.fiatBalance}
               btc={btcValueInFiat}
               profit={user.profitBalance}
@@ -505,7 +505,7 @@ export function DashboardContent({ user, btcPriceData, recentTransactions }: Das
           ACCOUNT INFO - Plan, Tier, Referral Code
       ═══════════════════════════════════════════════════════════════════ */}
       <motion.div variants={itemVariants}>
-        <AccountInfoWidget 
+        <AccountInfoWidget
           tier={user.tier}
           referralCode={user.referralCode}
           currentPlan={user.currentPlanName}
@@ -656,7 +656,7 @@ export function DashboardContent({ user, btcPriceData, recentTransactions }: Das
       <motion.div variants={itemVariants}>
         <div className="flex items-center justify-between mb-3">
           <h2 className="text-[10px] font-semibold text-text-muted uppercase tracking-wider">Recent Activity</h2>
-          <Link 
+          <Link
             href="/dashboard/transactions"
             className="flex items-center gap-0.5 text-[10px] font-medium text-primary hover:text-primary-hover transition-colors"
           >
@@ -682,7 +682,7 @@ export function DashboardContent({ user, btcPriceData, recentTransactions }: Das
                   APPROVED: "bg-success/10 text-success",
                   DECLINED: "bg-destructive/10 text-destructive",
                 };
-                
+
                 return (
                   <motion.div
                     key={tx.id}
@@ -701,8 +701,8 @@ export function DashboardContent({ user, btcPriceData, recentTransactions }: Das
                       <div>
                         <p className="text-sm font-medium text-text-primary">{config.label}</p>
                         <p className="text-[10px] text-text-muted">
-                          {new Date(tx.createdAt).toLocaleDateString("en-US", { 
-                            month: "short", 
+                          {new Date(tx.createdAt).toLocaleDateString("en-US", {
+                            month: "short",
                             day: "numeric",
                             hour: "2-digit",
                             minute: "2-digit"
@@ -742,8 +742,8 @@ export function DashboardContent({ user, btcPriceData, recentTransactions }: Das
               <p className="mt-1 text-xs text-text-muted max-w-[260px]">
                 Make your first deposit to begin investing and watch your portfolio grow.
               </p>
-              <Link 
-                href="/dashboard/wallets"
+              <Link
+                href="/dashboard/deposit"
                 className="mt-4 inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-xs font-medium hover:bg-primary-hover transition-colors"
               >
                 <ArrowDownToLine className="h-3.5 w-3.5" />
